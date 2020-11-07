@@ -35,7 +35,7 @@
                     </div>
                     <div class="row">
                         <div v-for="(row, idx2) in product.data" :key="`c-prod-card${idx2}`" class="col-6 col-sm-4 col-lg-3 col-xl-2">
-                            <c-prod-card :class-name="''" :media-type="product.media" :product="row"></c-prod-card>
+                            <!-- <c-prod-card :class-name="''" :media-type="product.media" :product="row"></c-prod-card> -->
                         </div>
                     </div>
                     <div class="col-12 btn-see-more">
@@ -50,58 +50,21 @@
 
 <script>
 
-import Swiper from 'swiper'
-import CProdCard from '../components/product/Card'
-
 export default {
 
-  components: { CProdCard },
+  components: {},
 
   data: () => {
     return {
-      productsPopularity: [],
-      products: [],
-      preloader: false
+        productsPopularity: [],
+        products: [],
+        preloader: false
     }
   },
   methods: {
-    initSwiper () {
-      // eslint-disable-next-line no-new
-      new Swiper('.carrousel-container', {
-        spaceBetween: 30,
-        speed: 500,
-        slidesPerView: 4,
-        slidesPerColumn: 1,
-        watchSlidesVisibility: true,
-        autoplay: false,
-        loop: true,
-        // Responsive breakpoints
-        breakpoints: {
-          0: {
-            slidesPerView: 1 },
-          375: {
-            slidesPerView: 1 },
-          425: {
-            slidesPerView: 2 },
-          576: {
-            slidesPerView: 2 },
-          768: {
-            slidesPerView: 3 },
-          992: {
-            slidesPerView: 4 },
-          1200: {
-            slidesPerView: 4 }
-        },
-        navigation: {
-          nextEl: '.home__nav--next',
-          prevEl: '.home__nav--prev'
-        },
-        paginationClickable: false
-      })
-    },
     async getProducts () {
-      this.preloader = true
-      await window.axios.get(process.env.URL_API_BACKEND + 'media/home')
+        this.preloader = true
+        await window.axios.get(process.env.URL_API_BACKEND + 'media/home')
         .then((result) => {
           this.preloader = false
           this.productsPopularity = result.data[0]
@@ -116,11 +79,11 @@ export default {
   },
 
   updated () {
-    this.initSwiper()
+
   },
 
   mounted () {
-    this.getProducts()
+    //this.getProducts()
   }
 }
 </script>
