@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import CHeader from './components/Header'
-import CFooter from './components/Footer'
+import CHeader from '@components/Header'
+import CFooter from '@components/Footer'
 export default {
   name: 'App',
   components: { CHeader, CFooter }

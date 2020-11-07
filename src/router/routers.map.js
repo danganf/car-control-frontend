@@ -1,5 +1,5 @@
-import Home from "../pages/Home";
-import Page404 from "../pages/error/Page404";
+import Home from "@pages/Home"
+import Page404 from "@pages/error/Page404"
 
 export default [
 

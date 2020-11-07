@@ -7,7 +7,7 @@
                         <div class="header__content">
                             <!-- header logo -->
                             <a href="" class="header__logo">
-                                CAR<span class="last">CONTROL</span>
+                                CAR<span class="last">CTR</span>
                             </a>
                             <!-- end header logo -->
 
