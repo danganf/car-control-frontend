@@ -27,7 +27,7 @@
                         </h2>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3" v-for="(vehicle, idx) in vehicles" :key="`div-vehicle-${idx}`">
-                        <vehicle-card :vehicle="vehicle" :key="`c-vehicle-card-${idx}`"></vehicle-card>
+                        <card-vehicle :vehicle="vehicle" :key="`c-vehicle-card-${idx}`"></card-vehicle>
 				    </div>
                 </div>
             </div>
@@ -39,11 +39,11 @@
 <script>
 
 import vehicleService from '../services/vehicles.service'
-import VehicleCard from '@components/vehicle/Card'
+import CardVehicle from '@components/card/Vehicle'
 
 export default {
 
-  components: {VehicleCard},
+  components: {CardVehicle},
 
   data: () => {
     return {

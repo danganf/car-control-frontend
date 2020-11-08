@@ -2,13 +2,13 @@ const SET_PRELOADER = ( state, value ) => {
     state.preloader = value;
 };
 
-const SET_LIST = ( state, obj ) => {
-    state.list = obj;
+const SET_LIST = ( state, value ) => {
+    state.list = value;
 };
 
 export default {
-    SET_LIST,
     SET_PRELOADER,
+    SET_LIST,
     SET_ERROR: ( state, msg ) => {
         state.msgsError = msg;
     },

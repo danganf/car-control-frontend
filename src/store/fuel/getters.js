@@ -1,5 +1,5 @@
-const leanList = state => state.list;
+//const leanList = state => state.list;
 
 export default {
-    leanList
+
 };

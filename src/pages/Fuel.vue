@@ -1,34 +1,38 @@
 <template>
     <div>
-        <section class="home">
-
+        <section class="section section--first section--bg">
             <div class="owl-carousel home__bg">
                 <div class="home__cover" style="background: url('static/img/home/home__bg2.jpg') center center / cover no-repeat;"></div>
             </div>
-
             <div class="container">
                 <div class="row">
-                    <div class="col-12 n-p-l">
-                        <h1 class="home__title">
-                            Meus <b>veículos</b>
-                            <i v-if="preloader" class="fas fa-spinner fa-pulse fa-1x"></i>
-                            <button class="filter__btn new-vehicle" type="button">Criar novo</button>
-                        </h1>
+                    <div class="col-12">
+                        <div class="section__wrap">
+                            <h2 class="section__title">
+                                Combutíveis
+                                <i v-if="preloader" class="fas fa-spinner fa-pulse fa-1x"></i>
+                            </h2>
+                            <ul class="breadcrumb">
+							    <li class="breadcrumb__item"><button class="filter__btn new-vehicle" type="button">Criar novo</button></li>
+						    </ul>
+                        </div>
                     </div>
                 </div>
+            </div>
+	    </section>
 
+        <section class="section">
+            <div class="container">
                 <div class="row">
-                    <div class="col-12">&nbsp;</div>
-                </div>
-                <div class="row">
-                    <div v-if="!vehicles.length" class="col-12">
-                        <h2 class="feature__title">
-                            Nenhum veículo cadastrado...
-                        </h2>
+                    <div class="col-12">
+                        <div class="accordion" id="accordion">
+                            <div class="row">
+                                <div class="col-12 col-md-4 col-lg-4" v-for="(fuel, idx) in fuels" :key="`div-fuel-${idx}`">
+                                    <card-fuel :vehicle="fuel" :key="`c-fuel-card-${idx}`"></card-fuel>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3" v-for="(vehicle, idx) in vehicles" :key="`div-vehicle-${idx}`">
-                        <vehicle-card :vehicle="vehicle" :key="`c-vehicle-card-${idx}`"></vehicle-card>
-				    </div>
                 </div>
             </div>
         </section>
@@ -38,16 +42,17 @@
 
 <script>
 
-import vehicleService from '../services/vehicles.service'
-import VehicleCard from '@components/vehicle/Card'
+import FuelService from '@/services/fuel.service'
+import CardFuel from '@components/card/Fuel'
 
 export default {
 
-  components: {VehicleCard},
+  components: {CardFuel},
 
   data: () => {
     return {
-        vehicles: [{},{},{},{},{},{}],
+        // {},{},{},{},{},{}
+        fuels: [{},{},{},{},{},{}],
         preloader: false
     }
   },
@@ -60,24 +65,22 @@ export default {
   },
 
   mounted () {
-    vehicleService.getAll()
+    FuelService.getAll()
   }
 }
 </script>
 
 <style scoped>
-    .new-vehicle{display: inline;position: absolute;right: 0;}
-    .carrousel-container {margin-left: auto;margin-right: auto;position: relative;list-style: none;padding: 0;overflow: hidden;}
-    .swiper-wrapper{display: inline-flex;}
+    .home__bg{z-index: 0;}
     .home__cover{height: 100%;}
-    .home__carousel .item{float: left;}
-    .home__bg {top: -24px;}
+    .section__title button{float: right;}
+    .breadcrumb__item:before{display: none;}
+    .accordion{height: auto;max-height: none;}
 
     @media (min-width: 320px) {
-        .home__carousel .item{padding: 0 15px 0 15px;}
-        .btn-see-more{padding-bottom: 30px;}
+
     }
     @media (min-width: 425px) {
-        .home__carousel .item{padding: 0 0 0 0;}
+
     }
 </style>
