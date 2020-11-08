@@ -19,5 +19,7 @@
 </script>
 
 <style scoped>
-
+    .price:hover{
+        border-top: 1.2px solid var(--color-line-1);
+    }
 </style>
