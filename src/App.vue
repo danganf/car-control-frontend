@@ -11,8 +11,11 @@
 <script>
 import CHeader from '@components/Header'
 import CFooter from '@components/Footer'
+import store from '@/store'
+
 export default {
   name: 'App',
+  store,
   components: { CHeader, CFooter }
 }
 </script>
