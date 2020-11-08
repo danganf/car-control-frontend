@@ -12,7 +12,7 @@
                         <h1 class="home__title">
                             Meus <b>veículos</b>
                             <i v-if="preloader" class="fas fa-spinner fa-pulse fa-1x"></i>
-                            <button class="filter__btn new-vehicle" type="button">Criar</button>
+                            <button class="filter__btn new-vehicle" type="button">Criar novo</button>
                         </h1>
                     </div>
                 </div>
@@ -26,16 +26,8 @@
                             Nenhum veículo cadastrado...
                         </h2>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3" v-for="(vehicle, idx) in vehicles" :key="`c-vehicle-card${idx}`">
-                        <div class="price">
-                            <div class="price__item price__item--first"><span>Basic</span> <span>Edit</span></div>
-                            <div class="price__item"><span>7 days</span></div>
-                            <div class="price__item"><span>720p Resolution</span></div>
-                            <div class="price__item"><span>Limited Availability</span></div>
-                            <div class="price__item"><span>Desktop Only</span></div>
-                            <div class="price__item"><span>Limited Support</span></div>
-                            <a href="#" class="price__btn">Selecionar</a>
-                        </div>
+                    <div class="col-12 col-md-4 col-lg-3" v-for="(vehicle, idx) in vehicles" :key="`div-vehicle-${idx}`">
+                        <vehicle-card :vehicle="vehicle" :key="`c-vehicle-card-${idx}`"></vehicle-card>
 				    </div>
                 </div>
             </div>
@@ -47,14 +39,15 @@
 <script>
 
 import vehicleService from '../services/vehicles.service'
+import VehicleCard from '@components/vehicle/Card'
 
 export default {
 
-  components: {},
+  components: {VehicleCard},
 
   data: () => {
     return {
-        vehicles: [1,2,3],
+        vehicles: [{},{},{}],
         preloader: false
     }
   },

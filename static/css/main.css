@@ -3741,3 +3741,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 @media(min-width: 768px){
   section.section--first, section.details{margin-top: 66px !important;}
 }
+
+/*CUSTOM*/
+.cursor-pointer{cursor: pointer;}
