@@ -3,7 +3,7 @@
         <div class="price__item price__item--first"><span>Basic</span><span><i class="far vehicle-edit cursor-pointer fa-edit"></i></span></div>
         <div class="price__item"><span>7 days</span></div>
         <div class="price__item"><span>720p Resolution</span></div>
-        <a href="#" class="price__btn">Selecionar</a>
+        <a href="#" class="price__btn"><i class="fas fa-tools"></i>&nbsp;Gerenciar</a>
     </div>
 </template>
 

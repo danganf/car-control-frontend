@@ -47,7 +47,7 @@ export default {
 
   data: () => {
     return {
-        vehicles: [],
+        vehicles: [{},{},{},{},{},{}],
         preloader: false
     }
   },
