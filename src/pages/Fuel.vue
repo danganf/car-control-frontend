@@ -8,10 +8,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="section__wrap">
-                            <h2 class="section__title">
-                                Combutíveis
-                                <i v-if="preloader" class="fas fa-spinner fa-pulse fa-1x"></i>
-                            </h2>
+                            <h2 class="section__title">Combutíveis</h2>
                             <ul class="breadcrumb">
 							    <li class="breadcrumb__item"><button class="filter__btn new-vehicle" type="button">Criar novo</button></li>
 						    </ul>
@@ -26,9 +23,10 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="accordion" id="accordion">
+                            <div style="text-align: center;"><i v-if="preloader" class="fas fa-spinner preloader fa-pulse fa-1x"></i></div>
                             <div class="row">
-                                <div class="col-12 col-md-4 col-lg-4" v-for="(fuel, idx) in fuels" :key="`div-fuel-${idx}`">
-                                    <card-fuel :vehicle="fuel" :key="`c-fuel-card-${idx}`"></card-fuel>
+                                <div class="col-12 col-md-4 col-lg-4" v-for="(fuel, idx) in list" :key="`div-fuel-${idx}`">
+                                    <card-fuel :data="fuel" :key="`c-fuel-card-${idx}`"></card-fuel>
                                 </div>
                             </div>
                         </div>
@@ -42,31 +40,35 @@
 
 <script>
 
-import FuelService from '@/services/fuel.service'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import CardFuel from '@components/card/Fuel'
 
 export default {
 
-  components: {CardFuel},
+    components: {CardFuel},
 
-  data: () => {
-    return {
-        // {},{},{},{},{},{}
-        fuels: [{},{},{},{},{},{}],
-        preloader: false
+    data: () => {
+        return {
+
+        }
+    },
+    methods: {
+        ...mapActions( 'Fuel', [ 'getAll' ] ),
+    },
+
+    updated () {
+
+    },
+
+    computed: {
+        ...mapState( 'Fuel', [ 'list', 'paginate', 'preloader' ] )
+    },
+
+    mounted () {
+        this.getAll()
+        //this.$store.dispatch('Fuel/getAll')
+        //console.log('dammoel',this.$store.state.Fuel.list)
     }
-  },
-  methods: {
-
-  },
-
-  updated () {
-
-  },
-
-  mounted () {
-    FuelService.getAll()
-  }
 }
 </script>
 
