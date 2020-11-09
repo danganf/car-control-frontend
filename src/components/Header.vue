@@ -23,7 +23,7 @@
                                 <li class="header__nav-item">
                                     <a class="dropdown-toggle header__nav-link" href="#" role="button">Cadastros</a>
                                     <ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuCatalog">
-                                        <li><router-link :to="{ name: 'fuel', force: true, params: {} }" role="button" class="header__nav-link">Combustíveis</router-link></li>
+                                        <li><router-link :to="{ name: 'fuels', force: true, params: {} }" role="button" class="header__nav-link">Combustíveis</router-link></li>
                                         <li><router-link :to="{ name: 'type-vehicles', force: true, params: {} }" role="button" class="header__nav-link">Tipo Veículos</router-link></li>
                                         <li><router-link :to="{ name: 'manufactures', force: true, params: {} }" role="button" class="header__nav-link">Fabricantes</router-link></li>
                                     </ul>

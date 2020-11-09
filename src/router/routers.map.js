@@ -1,5 +1,6 @@
 import Home from "@pages/Home"
 import Fuel from "@pages/Fuel"
+import TypeVehicle from "@pages/Type.Vehicle"
 import Page404 from "@pages/error/Page404"
 
 export default [
@@ -11,9 +12,15 @@ export default [
     },
 
     {
-        path: '/fuel',
+        path: '/fuels',
         component: Fuel,
-        name: 'fuel',
+        name: 'fuels',
+    },
+
+    {
+        path: '/type-vehicles',
+        component: TypeVehicle,
+        name: 'type-vehicles',
     },
 
     // Rota 404
