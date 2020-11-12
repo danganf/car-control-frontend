@@ -10,7 +10,9 @@
                         <div class="section__wrap">
                             <h2 class="section__title">Combutíveis</h2>
                             <ul class="breadcrumb">
-							    <li class="breadcrumb__item"><button class="filter__btn new-vehicle" type="button">Criar novo</button></li>
+							    <li class="breadcrumb__item">
+                                    <router-link :to="{ name: 'fuel-new', param: {} }" tag="button" role="button" class="filter__btn new-vehicle">Criar novo</router-link>
+                                </li>
 						    </ul>
                         </div>
                     </div>
@@ -73,8 +75,6 @@ export default {
 </script>
 
 <style scoped>
-    .home__bg{z-index: 0;}
-    .home__cover{height: 100%;}
     .section__title button{float: right;}
     .breadcrumb__item:before{display: none;}
     .accordion{height: auto;max-height: none;}

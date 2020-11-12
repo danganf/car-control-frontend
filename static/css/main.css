@@ -3760,4 +3760,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 }
 
 /*CUSTOM*/
+.home__bg{z-index: 0;}
+.home__cover{height: 100%;}
 .cursor-pointer{cursor: pointer;}
