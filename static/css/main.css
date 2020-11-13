@@ -3196,12 +3196,43 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   }
 }
 /*==============================
+	CRUD
+==============================*/
+.crud__content{
+    min-height: 0 !important;
+    padding: 0 0 40px 0 !important;
+}
+.crud__content label{
+    display: block;
+    color: rgba(255,255,255,0.5);
+    font-size: 1.1em;
+    font-weight: 300;
+}
+.crud__content label strong{
+    font-weight: 500;
+    font-size: 1.3em;
+}
+.crud__content > .sign__form {
+    padding: 20px 60px 50px 60px !important;
+    display: initial;
+}
+.crud__content > .sign__form:before {
+    display: none;
+}
+.crud__content .sign__btn:last-child{
+    margin-top: 40px !important;
+}
+.sign__input:focus{
+    border-bottom: 1px double rgba(255,255,255,0.3);
+}
+/*==============================
 	Sign
 ==============================*/
 .sign {
   display: block;
   position: relative;
 }
+.sign__btn i{margin-right: 10px;}
 .sign__content {
   display: flex;
   flex-direction: row;
@@ -3399,6 +3430,9 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   }
   .sign__logo {
     margin-bottom: 50px;
+  }
+  .sign__input {
+    width: 380px;
   }
 }
 /*==============================

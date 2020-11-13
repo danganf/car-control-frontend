@@ -14,6 +14,42 @@
                 </div>
             </div>
 	    </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="sign__content crud__content">
+						<!-- registration form -->
+						<form action="#" class="sign__form">
+
+							<div class="sign__group">
+                                <label for="name">Nome*</label>
+								<input type="text" class="sign__input" id="name" name="name" placeholder="Gasolina">
+							</div>
+
+							<div class="sign__group">
+                                <label for="unity">Unidade padrão*</label>
+								<input type="text" class="sign__input" id="unity" name="unity" placeholder="Litro">
+							</div>
+
+                            <div class="sign__group">
+                                <label for="description">Descrição</label>
+								<input type="text" class="sign__input" id="description" name="description" placeholder="">
+							</div>
+
+							<button class="sign__btn" type="button">
+                                <i class="fa fa-save"></i> Registrar
+                            </button>
+
+						</form>
+						<!-- registration form -->
+					</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div>
 </template>
 
