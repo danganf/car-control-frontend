@@ -25,7 +25,8 @@
 
 							<div class="sign__group">
                                 <label for="name">Nome*</label>
-								<input type="text" class="sign__input" id="name" name="name" v-model="name" placeholder="Gasolina">
+								<input type="text" class="sign__input" id="name" name="name"
+                                placeholder="Gasolina">
 							</div>
 
 							<div class="sign__group">
@@ -48,12 +49,17 @@
 </template>
 
 <script>
+
+import { validationMixin } from 'vuelidate'
+import { inputCheckIsValid } from "@/mixins/validate"
+import { mixMsgAwait, MixMsgNotify } from "@/mixins/helpers"
+
 export default {
 
     data: () => {
         return {
             name: null,
-            weels: 2
+            weels: 4
         }
     },
 
@@ -61,8 +67,15 @@ export default {
 
     },
 
-    updated () {
+    mixins: [
+        validationMixin,
+        inputCheckIsValid,
+        mixMsgAwait,
+        MixMsgNotify
+    ],
 
+    updated () {
+        this.weels = parseInt(this.weels)
     },
 
     mounted() {
