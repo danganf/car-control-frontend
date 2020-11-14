@@ -10,10 +10,11 @@ export class TypeVehicleModel extends modelContract{
 
     constructor(data) {
         super( attrs, data);
+        this.set('wheels', 4)
     }
 
     static validate(){
-        return { validations: {type_v: attrs } }
+        return { validations: {typeV: attrs } }
     }
 
 }

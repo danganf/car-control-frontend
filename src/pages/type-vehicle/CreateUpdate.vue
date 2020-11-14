@@ -26,17 +26,17 @@
 							<div class="sign__group">
                                 <label for="name">Nome*</label>
 								<input type="text" class="sign__input" id="name" name="name"
-                                v-model.trim='$v.name.$model'
-                                @blur='mix_inputCheckIsValid($v.name, $event)'
+                                v-model.trim='$v.typeV.name.$model'
+                                @blur='mix_inputCheckIsValid($v.typeV.name, $event)'
                                 placeholder="Gasolina">
-                                <span class="input__error" v-if='$v.name.$model && $v.name.$invalid'>Obrigatório e mínimo de 3 caracteres</span>
+                                <span class="input__error" v-if='$v.typeV.name.$model && $v.typeV.name.$invalid'>Obrigatório e mínimo de 3 caracteres</span>
 
 							</div>
 
 							<div class="sign__group">
-                                <label for="wheels">Qtd de rodas: <strong>{{wheels}}</strong></label>
+                                <label for="wheels">Qtd de rodas: <strong>{{typeV.wheels}}</strong></label>
 								<input type="range" min="2" max="30" step="1" class="sign__input slider"
-                                v-model.trim='$v.wheels.$model'
+                                v-model.trim='$v.typeV.wheels.$model'
                                 id="wheels" name="wheels">
 							</div>
 
@@ -59,14 +59,13 @@
 import { validationMixin } from 'vuelidate'
 import { inputCheckIsValid } from "@/mixins/validate"
 import { mixMsgAwait, MixMsgNotify } from "@/mixins/helpers"
-import { required, minLength, integer } from "vuelidate/lib/validators"
+import { TypeVehicleModel as Model } from '@/models/type-vehicle'
 
 export default {
 
     data: () => {
         return {
-            name: null,
-            wheels: 4
+            typeV: new Model()
         }
     },
 
@@ -76,19 +75,14 @@ export default {
 
     mixins: [
         validationMixin,
-        {
-            validations: {
-                name: {required, minLength: minLength(3)},
-                wheels: {required, integer}
-            }
-        },
+        Model.validate(),
         inputCheckIsValid,
         mixMsgAwait,
         MixMsgNotify
     ],
 
     updated () {
-        this.weels = parseInt(this.weels)
+        this.typeV.wheels = parseInt(this.typeV.wheels)
     },
 
     mounted() {
@@ -99,6 +93,7 @@ export default {
 
 <style scoped>
     .slidecontainer {width: 100%;}
+    input[type=range]{padding: 0 3px !important;}
 
     .slider {
         -webkit-appearance: none;
@@ -125,9 +120,9 @@ export default {
     }
 
     .slider::-moz-range-thumb {
-    width: 25px;
-    height: 20px;
-    background: #28282d;
-    cursor: pointer;
+        width: 25px;
+        height: 20px;
+        background: #28282d;
+        cursor: pointer;
     }
 </style>
