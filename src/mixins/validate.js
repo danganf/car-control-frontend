@@ -20,7 +20,7 @@ export const inputCheckIsValid =  {
                 event.target.classList.add('form__input-shake');
                 setTimeout(() => {
                     event.target.classList.remove('form__input-shake');
-                }, 600)
+                }, 1000)
             }
         }
     }

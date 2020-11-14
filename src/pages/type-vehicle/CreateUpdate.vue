@@ -26,12 +26,18 @@
 							<div class="sign__group">
                                 <label for="name">Nome*</label>
 								<input type="text" class="sign__input" id="name" name="name"
+                                v-model.trim='$v.name.$model'
+                                @blur='mix_inputCheckIsValid($v.name, $event)'
                                 placeholder="Gasolina">
+                                <span class="input__error" v-if='$v.name.$model && $v.name.$invalid'>Obrigatório e mínimo de 3 caracteres</span>
+
 							</div>
 
 							<div class="sign__group">
-                                <label for="wheels">Qtd de rodas: <strong>{{weels}}</strong></label>
-								<input type="range" min="2" max="30" step="1" v-model="weels" class="sign__input slider" id="wheels" name="wheels">
+                                <label for="wheels">Qtd de rodas: <strong>{{wheels}}</strong></label>
+								<input type="range" min="2" max="30" step="1" class="sign__input slider"
+                                v-model.trim='$v.wheels.$model'
+                                id="wheels" name="wheels">
 							</div>
 
 							<button class="sign__btn" type="button">
@@ -53,13 +59,14 @@
 import { validationMixin } from 'vuelidate'
 import { inputCheckIsValid } from "@/mixins/validate"
 import { mixMsgAwait, MixMsgNotify } from "@/mixins/helpers"
+import { required, minLength, integer } from "vuelidate/lib/validators"
 
 export default {
 
     data: () => {
         return {
             name: null,
-            weels: 4
+            wheels: 4
         }
     },
 
@@ -69,6 +76,12 @@ export default {
 
     mixins: [
         validationMixin,
+        {
+            validations: {
+                name: {required, minLength: minLength(3)},
+                wheels: {required, integer}
+            }
+        },
         inputCheckIsValid,
         mixMsgAwait,
         MixMsgNotify

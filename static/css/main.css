@@ -3785,6 +3785,16 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     opacity: 1;
   }
 }
+.snotify {z-index: 99999 !important;}
+.input__error {display: block;color: #C0101A;animation: shake 0.3s;animation-iteration-count: 3;font-size: .8em;}
+.form__input-shake {animation: shake 0.3s;animation-iteration-count: 3;border:1px solid #C0101A !important;}
+@keyframes shake {
+    0% { transform: translateX(0px)  }
+    25% { transform: translateX(2px) }
+    50% { transform: translateX(0px)  }
+    75% { transform: translateX(-2px) }
+    100% { transform: translateX(0px)  }
+}
 .no-cover{opacity: 0.6;}
 @media(min-width: 320px){
   section.section--first, section.details{margin-top: 40px !important;}
