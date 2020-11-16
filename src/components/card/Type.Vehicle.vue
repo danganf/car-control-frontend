@@ -11,7 +11,7 @@
             <span></span>
             <span>
                 <i @click="$router.push({name:'type-vehicles-edit', params: { uid: data.id }})" class="far type-vehicle-edit cursor-pointer fa-edit"></i>
-                <i class="far type-vehicle-edit cursor-pointer fa-trash-alt"></i>
+                <i @click="delet" class="far type-vehicle-edit cursor-pointer fa-trash-alt"></i>
             </span>
         </div>
     </div>
@@ -26,9 +26,39 @@
             }
         },
         methods:{
-            delete(){
-
+            async delet(){
+                this.$swal({
+                    title: "Você tem certeza?",
+                    text: "Uma vez deletado, essa informação não poderá ser recuperada!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        return window.axios.delete( process.env.URL_API_BACKEND + 'type-vehicle/' + this.data.id )
+                    }
+                    throw null
+                }).then(result => {
+                    if( result.status !== 400 ) {
+                        this.$emit('emit-remove', this.data.id)
+                        swal(result.data.message, {icon: "success"})
+                    } else {
+                        swal(result.data.message, {icon: "error"})
+                    }
+                }).catch(err => {
+                    if (err) {
+                        swal("Ops!", "Operação falhou!", "error")
+                    } else {
+                        swal.stopLoading()
+                        swal.close()
+                    }
+                })
             }
+        },
+
+        mounted () {
+
         }
     }
 </script>

@@ -28,7 +28,7 @@
                             <div style="text-align: center;"><i v-if="preloader" class="fas fa-spinner preloader fa-pulse fa-1x"></i></div>
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4" v-for="(row, idx) in list" :key="`div-type-${idx}`">
-                                    <card-types :data="row" :key="`c-type-card-${idx}`"></card-types>
+                                    <card-types :data="row" @emit-remove="emitRemove" :key="`c-type-card-${idx}`"></card-types>
                                 </div>
                             </div>
                         </div>
@@ -56,8 +56,12 @@ export default {
     },
     methods: {
         ...mapActions( 'TypeVehicle', [ 'getAll' ] ),
+        emitRemove(id){
+            //src/components/card/Type.Vehicle.vue
+            const idx = window._.findLastIndex(this.list, {id})
+            this.list.splice(idx,1)
+        }
     },
-
     updated () {
 
     },
