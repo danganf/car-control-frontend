@@ -17,4 +17,9 @@ export class TypeVehicleModel extends modelContract{
         return { validations: {typeV: attrs } }
     }
 
+    resetAttr(obj){
+        super.resetAttr(obj)
+        this.set('wheels', 4)
+    }
+
 }

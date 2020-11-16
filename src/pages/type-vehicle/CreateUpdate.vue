@@ -21,7 +21,7 @@
                     <div class="col-12">
                         <div class="sign__content crud__content">
 						<!-- registration form -->
-						<form action="#" class="sign__form">
+						<form action="#" class="sign__form" v-on:submit.stop.prevent="createOrUpdate()">
 
 							<div class="sign__group">
                                 <label for="name">Nome*</label>
@@ -40,8 +40,16 @@
                                 id="wheels" name="wheels">
 							</div>
 
-							<button class="sign__btn" type="button">
-                                <i class="fa fa-save"></i> Registrar
+                            <div class="sign__group">
+                                <transition name="fade">
+                                    <div v-if="msgError" class="session-error" role="alert"><strong>Ops!</strong> {{msgError}}</div>
+                                </transition>
+                            </div>
+
+							<button ref="btn" class="sign__btn" type="submit" :disabled="disabled">
+                                <i v-if="!preloader" class="fa fa-save"></i>
+                                <i v-else class="fa fa-spinner fa-pulse fa-1x preloader-auth"></i>
+                                Registrar
                             </button>
 
 						</form>
@@ -60,6 +68,7 @@ import { validationMixin } from 'vuelidate'
 import { inputCheckIsValid } from "@/mixins/validate"
 import { mixMsgAwait, MixMsgNotify } from "@/mixins/helpers"
 import { TypeVehicleModel as Model } from '@/models/type-vehicle'
+import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
 
@@ -70,7 +79,36 @@ export default {
     },
 
     methods: {
+        ...mapMutations('TypeVehicle', ['SET_PRELOADER']),
+        async createOrUpdate(){
+            if( !this.preloader ) {
+                this.$v.$touch()
+                if (this.$v.$invalid) {
+                    this.mix_setMsgAwait( 'Verifique os campos obrigatórios' )
+                    return
+                }
 
+                this.SET_PRELOADER(true)
+                this.msgError = null
+                try{
+                    const result = (await window.axios.post( process.env.URL_API_BACKEND + 'type-vehicle', this.typeV.toObjData() ) )
+                    if( result.status !== 400 ) {
+                        this.mix_msgNotify( result.data.message )
+                        this.SET_PRELOADER(false)
+                        this.typeV.resetAttr()
+                        this.$router.push({name:'type-vehicles'})
+                    }
+                } catch(error){
+                    this.SET_PRELOADER(false)
+                    this.msgError = error.response.data.message
+                }
+
+            }
+        },
+        init(){
+            this.$v.$touch()
+            this.disabled = this.$v.$invalid
+        }
     },
 
     mixins: [
@@ -81,12 +119,17 @@ export default {
         MixMsgNotify
     ],
 
+    computed: {
+        ...mapState( 'TypeVehicle', [ 'preloader' ] )
+    },
+
     updated () {
         this.typeV.wheels = parseInt(this.typeV.wheels)
+        this.init()
     },
 
     mounted() {
-
+        this.init()
     }
 }
 </script>

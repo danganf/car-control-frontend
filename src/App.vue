@@ -4,6 +4,7 @@
         <transition name="moveInUp">
             <router-view :key="$route.fullPath"></router-view>
         </transition>
+        <vue-snotify></vue-snotify>
         <c-footer></c-footer>
     </div>
 </template>

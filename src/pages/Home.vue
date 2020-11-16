@@ -38,7 +38,6 @@
 
 <script>
 
-import vehicleService from '../services/vehicles.service'
 import CardVehicle from '@components/card/Vehicle'
 
 export default {
@@ -60,7 +59,7 @@ export default {
   },
 
   mounted () {
-    vehicleService.getAll()
+    //vehicleService.getAll()
   }
 }
 </script>

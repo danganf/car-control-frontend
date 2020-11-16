@@ -11,7 +11,7 @@ import 'vue-snotify/styles/material.css'
 window.Vue = Vue
 window.eventBus = new Vue()
 
-Vue.use(Snotify, {toast: {showProgressBar: true, timeout: 3000, position: 'rightTop'}})
+Vue.use(Snotify, {toast: {showProgressBar: true, timeout: 3000, pauseOnHover: true, position: 'rightTop'}})
 Vue.use(VueSwal)
 Vue.use(Vuelidate)
 
