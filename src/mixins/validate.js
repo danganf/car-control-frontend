@@ -26,7 +26,6 @@ export const inputCheckIsValid =  {
     },
     data: () => {
         return {
-            msgError: null,
             disabled: false
         }
     }

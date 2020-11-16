@@ -10,7 +10,7 @@
         <div class="price__item price__item--btn">
             <span></span>
             <span>
-                <i class="far type-vehicle-edit cursor-pointer fa-edit"></i>
+                <i @click="$router.push({name:'type-vehicles-edit', params: { uid: data.id }})" class="far type-vehicle-edit cursor-pointer fa-edit"></i>
                 <i class="far type-vehicle-edit cursor-pointer fa-trash-alt"></i>
             </span>
         </div>
@@ -23,6 +23,11 @@
             data: {
                 type: Object,
                 required: true
+            }
+        },
+        methods:{
+            delete(){
+
             }
         }
     }

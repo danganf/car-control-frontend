@@ -17,6 +17,7 @@ export default [
         children: [
             { path: "", name: "type-vehicles", component: () => import(/* webpackChunkName: "group-type-vehicle" */ '@pages/type-vehicle/Index') },
             { path: "new", name: "type-vehicles-new", component: () => import(/* webpackChunkName: "group-type-vehicle" */ '@pages/type-vehicle/CreateUpdate') },
+            { path: ":uid/edit", name: "type-vehicles-edit", component: () => import(/* webpackChunkName: "group-type-vehicle" */ '@pages/type-vehicle/CreateUpdate') },
         ]
     },
 

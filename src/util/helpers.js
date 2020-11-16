@@ -11,3 +11,15 @@ export const formatMoney = ( value, currency, precision ) => {
 
     return `${currency} ${amount}`;
 };
+
+export const formatMsgError = (error) => {
+    let msgError = 'Alguma coisa errada aconteceu.';
+    if( window._.isNull(error) ){
+        msgError = null
+    } else if(typeof error === 'string'){
+        msgError = error
+    } else {
+        msgError = error.response.data.message
+    }
+    return msgError
+}

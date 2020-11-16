@@ -49,7 +49,7 @@
 							<button ref="btn" class="sign__btn" type="submit" :disabled="disabled">
                                 <i v-if="!preloader" class="fa fa-save"></i>
                                 <i v-else class="fa fa-spinner fa-pulse fa-1x preloader-auth"></i>
-                                Registrar
+                                {{action}}
                             </button>
 
 						</form>
@@ -74,12 +74,15 @@ export default {
 
     data: () => {
         return {
-            typeV: new Model()
+            typeV: new Model(),
+            action: 'Registrar',
+            uid: null
         }
     },
 
     methods: {
-        ...mapMutations('TypeVehicle', ['SET_PRELOADER']),
+        ...mapActions( 'TypeVehicle', [ 'getOne' ] ),
+        ...mapMutations('TypeVehicle', ['SET_PRELOADER','SET_ERROR','SET_LIST']),
         async createOrUpdate(){
             if( !this.preloader ) {
                 this.$v.$touch()
@@ -89,20 +92,25 @@ export default {
                 }
 
                 this.SET_PRELOADER(true)
-                this.msgError = null
+                this.SET_ERROR(null)
                 try{
-                    const result = (await window.axios.post( process.env.URL_API_BACKEND + 'type-vehicle', this.typeV.toObjData() ) )
+                    let result
+                    if( !this.uid ){
+                        result = (await window.axios.post( process.env.URL_API_BACKEND + 'type-vehicle', this.typeV.toObjData() ) )
+                    } else {
+                        result = (await window.axios.put( process.env.URL_API_BACKEND + 'type-vehicle/' + this.uid, this.typeV.toObjData() ) )
+                    }
                     if( result.status !== 400 ) {
                         this.mix_msgNotify( result.data.message )
                         this.SET_PRELOADER(false)
+                        this.SET_LIST([])
                         this.typeV.resetAttr()
                         this.$router.push({name:'type-vehicles'})
                     }
                 } catch(error){
                     this.SET_PRELOADER(false)
-                    this.msgError = error.response.data.message
+                    this.SET_ERROR(error)
                 }
-
             }
         },
         init(){
@@ -119,17 +127,32 @@ export default {
         MixMsgNotify
     ],
 
+    watch: {
+        list: function (val) {
+            if( window._.size(val) > 0 ){
+                this.typeV.setData(val)
+                this.action = 'Atualizar'
+            } else {
+                this.typeV.resetAttr()
+            }
+        },
+    },
+
     computed: {
-        ...mapState( 'TypeVehicle', [ 'preloader' ] )
+        ...mapState( 'TypeVehicle', [ 'preloader', 'msgError', 'list' ] )
     },
 
     updated () {
-        this.typeV.wheels = parseInt(this.typeV.wheels)
+        this.typeV.set('wheels', parseInt(this.typeV.wheels))
         this.init()
     },
 
     mounted() {
         this.init()
+        if( typeof this.$route.params.uid !== 'undefined' ){
+            this.getOne({id: this.$route.params.uid})
+            this.uid = this.$route.params.uid
+        }
     }
 }
 </script>

@@ -1,12 +1,12 @@
 export class modelContract {
     constructor( attrs, data){
-        this.setdata( data );
+        this.setData( data );
         this.__attrs = attrs;
         this.resetAttr();
         delete this.__attrs;
     }
 
-    setdata( data ){
+    setData( data ){
         if( typeof data === 'object'){
             let scope = this;
             Object.entries(data).forEach(([key, value]) => {
@@ -24,7 +24,6 @@ export class modelContract {
     set( key, val ){
 
         if( this.hasOwnProperty( key ) ) {
-            //console.log(key, typeof val, val);
             this[key] = val;
         }
     }
