@@ -10,8 +10,8 @@
         <div class="price__item price__item--btn">
             <span></span>
             <span>
-                <i class="far fuel-edit cursor-pointer fa-edit"></i>
-                <i class="far fuel-edit cursor-pointer fa-trash-alt"></i>
+                <i @click="$router.push({name:'fuel-edit', params: { uid: data.id }})" class="far fuel-edit cursor-pointer fa-edit"></i>
+                <i @click="delet" class="far fuel-edit cursor-pointer fa-trash-alt"></i>
             </span>
         </div>
     </div>
@@ -24,7 +24,39 @@
                 type: Object,
                 required: true
             }
-        }
+        },
+
+        methods:{
+            async delet(){
+                this.$swal({
+                    title: "Você tem certeza?",
+                    text: "Uma vez deletado, essa informação não poderá ser recuperada!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        return window.axios.delete( process.env.URL_API_BACKEND + 'fuel/' + this.data.id )
+                    }
+                    throw null
+                }).then(result => {
+                    if( result.status !== 400 ) {
+                        this.$emit('emit-remove', this.data.id)
+                        swal(result.data.message, {icon: "success"})
+                    } else {
+                        swal(result.data.message, {icon: "error"})
+                    }
+                }).catch(err => {
+                    if (err) {
+                        swal("Ops!", "Operação falhou!", "error")
+                    } else {
+                        swal.stopLoading()
+                        swal.close()
+                    }
+                })
+            }
+        },
     }
 </script>
 

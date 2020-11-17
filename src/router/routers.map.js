@@ -8,6 +8,7 @@ export default [
         children: [
             { path: "", name: "fuels", component: () => import(/* webpackChunkName: "group-fuel" */ '@pages/fuel/Index') },
             { path: "new", name: "fuel-new", component: () => import(/* webpackChunkName: "group-fuel" */ '@pages/fuel/CreateUpdate') },
+            { path: ":uid/edit", name: "fuel-edit", component: () => import(/* webpackChunkName: "group-fuel" */ '@pages/fuel/CreateUpdate') },
         ]
     },
 

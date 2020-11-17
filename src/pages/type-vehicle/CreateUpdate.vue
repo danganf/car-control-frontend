@@ -28,7 +28,7 @@
 								<input type="text" class="sign__input" id="name" name="name"
                                 v-model.trim='$v.typeV.name.$model'
                                 @blur='mix_inputCheckIsValid($v.typeV.name, $event)'
-                                placeholder="Gasolina">
+                                placeholder="Caminhão">
                                 <span class="input__error" v-if='$v.typeV.name.$model && $v.typeV.name.$invalid'>Obrigatório e mínimo de 3 caracteres</span>
 
 							</div>
@@ -135,7 +135,7 @@ export default {
             } else {
                 this.typeV.resetAttr()
             }
-        },
+        }
     },
 
     computed: {

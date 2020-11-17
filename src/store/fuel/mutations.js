@@ -1,3 +1,5 @@
+import {formatMsgError} from '@/util/helpers'
+
 const SET_PRELOADER = ( state, value ) => {
     state.preloader = value;
 };
@@ -15,6 +17,6 @@ export default {
     SET_LIST,
     SET_PAGINATE,
     SET_ERROR: ( state, msg ) => {
-        state.msgsError = msg;
+        state.msgError = formatMsgError(msg);
     },
 };

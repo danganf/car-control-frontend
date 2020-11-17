@@ -3,7 +3,7 @@ export class modelContract {
         this.setData( data );
         this.__attrs = attrs;
         this.resetAttr();
-        delete this.__attrs;
+        //delete this.__attrs;
     }
 
     setData( data ){
@@ -27,6 +27,21 @@ export class modelContract {
             this[key] = val;
         }
     }
+
+    // getConfig(key, subkey){
+    //     let value = ''
+    //     const attrs = this.__attrs
+    //     Object.keys(attrs).forEach(function (value) {
+    //         if( value === key ){
+    //             Object.keys(attrs[key]).forEach(function (value) {
+    //                 if( value === subkey ){
+    //                     console.log(attrs[key][subkey])
+    //                 }
+    //             })
+    //         }
+    //     })
+    //     return value
+    // }
 
     resetAttr( valDefault ){
         valDefault = typeof valDefault === 'undefined' ? null : valDefault;
