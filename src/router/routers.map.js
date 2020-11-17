@@ -22,6 +22,16 @@ export default [
         ]
     },
 
+    {
+        path: '/manufacture',
+        component: { template: `<router-view></router-view>` },
+        children: [
+            { path: "", name: "manufactures", component: () => import(/* webpackChunkName: "group-manufacture" */ '@pages/manufacture/Index') },
+            { path: "new", name: "manufacture-new", component: () => import(/* webpackChunkName: "group-manufacture" */ '@pages/manufacture/CreateUpdate') },
+            { path: ":uid/edit", name: "manufacture-edit", component: () => import(/* webpackChunkName: "group-manufacture" */ '@pages/manufacture/CreateUpdate') },
+        ]
+    },
+
     // Rota 404
     {
         path: '*',

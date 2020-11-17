@@ -8,12 +8,12 @@ const SET_LIST = ( state, value ) => {
     state.list = value;
 };
 
-const SET_DATA = ( state, value ) => {
-    state.data = value;
-};
-
 const SET_PAGINATE = ( state, value ) => {
     state.paginate = value;
+};
+
+const SET_DATA = ( state, value ) => {
+    state.data = value;
 };
 
 export default {

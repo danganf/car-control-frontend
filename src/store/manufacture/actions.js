@@ -1,9 +1,11 @@
+import { cat } from "shelljs";
 
-const baseUrl = process.env.URL_API_BACKEND + 'type-vehicle/'
+const baseUrl = process.env.URL_API_BACKEND + 'manufacture/'
 
-const getAll = async ( { commit }, obj ) => {
+const getAll = async ( { commit, state }, obj ) => {
     commit('SET_PRELOADER', true )
     commit('SET_ERROR', null )
+    commit('SET_LIST', [] )
     window.axios.get( baseUrl )
     .then(( result ) => {
         commit('SET_LIST', result.data.data.rows )
@@ -18,6 +20,7 @@ const getAll = async ( { commit }, obj ) => {
 const getOne = async ( { commit, state }, obj ) => {
     if( typeof obj.id !== 'undefined' ){
         commit('SET_PRELOADER', true )
+        commit('SET_DATA', {} )
         commit('SET_ERROR', null )
 
         //APROVEITANDO O STATE LIST CARREGADO NA PAGINA Index.vue

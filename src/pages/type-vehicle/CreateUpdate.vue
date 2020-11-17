@@ -82,7 +82,7 @@ export default {
 
     methods: {
         ...mapActions( 'TypeVehicle', [ 'getOne' ] ),
-        ...mapMutations('TypeVehicle', ['SET_PRELOADER','SET_ERROR','SET_LIST']),
+        ...mapMutations('TypeVehicle', ['SET_PRELOADER','SET_ERROR','SET_DATA']),
         async createOrUpdate(){
             if( !this.preloader ) {
                 this.$v.$touch()
@@ -103,7 +103,7 @@ export default {
                     if( result.status !== 400 ) {
                         this.mix_msgNotify( result.data.message )
                         this.SET_PRELOADER(false)
-                        this.SET_LIST([])
+                        this.SET_DATA([])
                         this.typeV.resetAttr()
                         this.$router.push({name:'type-vehicles'})
                     }
@@ -128,7 +128,7 @@ export default {
     ],
 
     watch: {
-        list: function (val) {
+        data: function (val) {
             if( window._.size(val) > 0 ){
                 this.typeV.setData(val)
                 this.action = 'Atualizar'
@@ -139,7 +139,7 @@ export default {
     },
 
     computed: {
-        ...mapState( 'TypeVehicle', [ 'preloader', 'msgError', 'list' ] )
+        ...mapState( 'TypeVehicle', [ 'preloader', 'msgError', 'data' ] )
     },
 
     updated () {
