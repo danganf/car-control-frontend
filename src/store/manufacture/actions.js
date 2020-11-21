@@ -6,7 +6,10 @@ const getAll = async ( { commit, state }, obj ) => {
     commit('SET_PRELOADER', true )
     commit('SET_ERROR', null )
     commit('SET_LIST', [] )
-    window.axios.get( baseUrl )
+
+    const page = typeof obj.page !== 'undefined' ? parseInt(obj.page) : 1
+
+    window.axios.get( baseUrl + `?page=${page}` )
     .then(( result ) => {
         commit('SET_LIST', result.data.data.rows )
         commit('SET_PAGINATE', window._.omit(result.data.data, 'rows') )

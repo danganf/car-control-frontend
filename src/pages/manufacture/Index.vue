@@ -22,6 +22,13 @@
 
         <section class="section">
             <div class="container">
+                <div class="row"  v-show="!preloader">
+                    <div class="col-12">
+                        <c-paginator :route_name="'manufactures'" :key="'paginator-top'"
+                            :total_pages="paginate.page_count" :total_results="paginate.items_count"
+                            :limit="limit" :current_page="paginate.page_current"></c-paginator>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="accordion" id="accordion">
@@ -34,6 +41,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="row"  v-show="!preloader">
+                    <div class="col-12">
+                        <c-paginator :route_name="'manufactures'" :key="'paginator-bottom'"
+                            :total_pages="paginate.page_count" :total_results="paginate.items_count"
+                            :limit="limit" :current_page="paginate.page_current"></c-paginator>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -44,14 +58,16 @@
 
 import { mapState, mapActions, mapGetters } from 'vuex'
 import CardManufacture from '@components/card/Manufacture'
+import CPaginator from '@components/Paginator'
 
 export default {
 
-    components: {CardManufacture},
+    components: {CardManufacture, CPaginator},
 
     data: () => {
         return {
-
+            limit: 20,
+            current_page: 0
         }
     },
     methods: {
@@ -71,7 +87,12 @@ export default {
     },
 
     mounted () {
-        this.getAll()
+        if( this.$route.params.page ){
+            this.current_page = parseInt( this.$route.params.page );
+        } else {
+            this.current_page = 1;
+        }
+        this.getAll({page: this.current_page})
     }
 }
 </script>

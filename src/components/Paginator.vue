@@ -69,9 +69,9 @@ export default {
     clickPage (page) {
       if (this.current_page !== page) {
         this.$router.push({
-          name: this.route_name, 
+          name: this.route_name,
+          force: true,
           params: {
-            type: this.$route.params.media,
             page: page
           }
         })
