@@ -3814,3 +3814,10 @@ button:disabled:hover, button[disabled]{opacity: .3;}
 .home__bg{z-index: 0;}
 .home__cover{height: 100%;}
 .cursor-pointer{cursor: pointer;}
+.vm--modal{
+    background-color: #28282D !important;
+    -webkit-box-shadow: 0 0 20px 0 rgba(255,88,96,0.5) !important;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,1.0) !important;
+    border-radius: 6px !important;
+    color: var(--color-font-1);
+}

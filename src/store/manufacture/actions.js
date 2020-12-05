@@ -1,4 +1,5 @@
 import { cat } from "shelljs";
+import { isString } from "underscore";
 
 const baseUrl = process.env.URL_API_BACKEND + 'manufacture/'
 
@@ -7,9 +8,14 @@ const getAll = async ( { commit, state }, obj ) => {
     commit('SET_ERROR', null )
     commit('SET_LIST', [] )
 
-    const page = typeof obj.page !== 'undefined' ? parseInt(obj.page) : 1
+    let page = 'ALL';
 
-    window.axios.get( baseUrl + `?page=${page}` )
+    if( typeof obj !== 'undefined' ){
+        page = typeof obj.page !== 'undefined' ? ( obj.page !== 'ALL' ? parseInt(obj.page) : obj.page ) : 1
+        page = isString(page) ? page : (!isNaN(page) ? page : 1);
+    }
+
+    window.axios.get( baseUrl + (page !== 'ALL' ? `?page=${page}` : '') )
     .then(( result ) => {
         commit('SET_LIST', result.data.data.rows )
         commit('SET_PAGINATE', window._.omit(result.data.data, 'rows') )

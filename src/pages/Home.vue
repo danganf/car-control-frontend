@@ -12,7 +12,7 @@
                         <h1 class="home__title">
                             Meus <b>veículos</b>
                             <i v-if="preloader" class="fas fa-spinner fa-pulse fa-1x"></i>
-                            <button class="filter__btn new-vehicle" type="button">Criar novo</button>
+                            <button class="filter__btn new-vehicle" type="button" @click="openModal">Criar novo</button>
                         </h1>
                     </div>
                 </div>
@@ -39,10 +39,11 @@
 <script>
 
 import CardVehicle from '@components/card/Vehicle'
+import CVehicleCrud from '@pages/vehicle/CreateOrUpdate'
 
 export default {
 
-  components: {CardVehicle},
+  components: {CardVehicle,CVehicleCrud},
 
   data: () => {
     return {
@@ -51,7 +52,11 @@ export default {
     }
   },
   methods: {
-
+      openModal(){
+          this.$modal.show(CVehicleCrud ,{},{
+              //height: 'auto',
+          })
+      }
   },
 
   updated () {
@@ -59,7 +64,7 @@ export default {
   },
 
   mounted () {
-    //vehicleService.getAll()
+
   }
 }
 </script>
