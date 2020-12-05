@@ -54,7 +54,7 @@ export default {
   methods: {
       openModal(){
           this.$modal.show(CVehicleCrud ,{},{
-              //height: 'auto',
+              height: 'auto',
           })
       }
   },
