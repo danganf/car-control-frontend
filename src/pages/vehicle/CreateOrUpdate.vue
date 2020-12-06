@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="title">
-            Novo Carro
+            Novo Carro <small style="font-size:10px">(click fora para fechar)</small>
             <div class="new-vehicle">
                 <button class="filter__btn" type="button">Criar</button>
             </div>
@@ -12,32 +12,36 @@
                     <div class="crud">
                         <form action="#" class="form__cad">
                             <div class="group">
-                                <label for="template">Modelo*</label>
-                                <input type="text" class="sign__input col-12" id="template" name="template" minlength="3" maxlength="30" placeholder="">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="manufacture">Tipo do veículo*<i v-if="preloaderType" class="fas fa-spinner preloader fa-pulse"></i></label>
+                                        <model-select :options="listToSelectTypes" v-model="typeVehicle"
+                                        placeholder="selecione">
+                                        </model-select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="manufacture">Fabricante*<i v-if="preloaderManufacture" class="fas fa-spinner preloader fa-pulse"></i></label>
+                                        <model-select :options="listToSelectManufactures" v-model="manufacture"
+                                        placeholder="selecione">
+                                        </model-select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="group">
-                                <label for="year">Ano do carro: <strong>{{year}}</strong></label>
+                                <label for="manufacture">Combustivel*<i v-if="preloaderFuel" class="fas fa-spinner preloader fa-pulse"></i></label>
+                                <model-select :options="listToSelectFuels" v-model="fuel"
+                                placeholder="selecione">
+                                </model-select>
+                            </div>
+                            <div class="group">
+                                <label for="year">Ano do carro*: <strong>{{year}}</strong></label>
                                 <input type="range" min="1900" max="2022" step="1" class="sign__input slider"
                                 v-model.trim='year'
                                 id="year" name="year">
                             </div>
                             <div class="group">
-                                <label for="manufacture">Tipo do veículo*</label>
-                                <model-select :options="listToSelectTypes" v-model="typeVehicle"
-                                placeholder="selecione">
-                                </model-select>
-                            </div>
-                            <div class="group">
-                                <label for="manufacture">Fabricante*</label>
-                                <model-select :options="listToSelectManufactures" v-model="manufacture"
-                                placeholder="selecione">
-                                </model-select>
-                            </div>
-                            <div class="group">
-                                <label for="manufacture">Combustivel*</label>
-                                <model-select :options="listToSelectFuels" v-model="fuel"
-                                placeholder="selecione">
-                                </model-select>
+                                <label for="template">Modelo</label>
+                                <input type="text" class="sign__input col-12" id="template" name="template" minlength="3" maxlength="30" placeholder="">
                             </div>
                             <div class="group">
                                 <div class="row">
@@ -50,10 +54,6 @@
                                         <input type="text" class="sign__input col-12" id="Renavam" name="Renavam" minlength="3" maxlength="30" placeholder="">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="group">
-                                <label for="obs">Obs</label>
-                                <input type="text" class="sign__input col-12" id="obs" name="obs" placeholder="">
                             </div>
                         </form>
                     </div>
@@ -93,6 +93,9 @@ export default {
     },
 
     computed: {
+        ...mapState( 'TypeVehicle', { preloaderType : 'preloader' } ),
+        ...mapState( 'Fuel', { preloaderFuel : 'preloader' } ),
+        ...mapState( 'Manufacture', { preloaderManufacture : 'preloader' } ),
         ...mapGetters( 'TypeVehicle', { listToSelectTypes : 'listToSelect' } ),
         ...mapGetters( 'Fuel', { listToSelectFuels : 'listToSelect' } ),
         ...mapGetters( 'Manufacture', { listToSelectManufactures : 'listToSelect' } )
@@ -126,7 +129,7 @@ export default {
         width: 90%;
     }
     .form__cad{
-        padding: 50px 0 50px 35px;
+        padding: 30px 0 30px 35px;
         width: 90%;
     }
     .form__cad label{
@@ -149,6 +152,8 @@ export default {
         -webkit-box-shadow: 0 0 20px 0 rgba(255,88,96,0.5);
         box-shadow: 0 0 20px 0 rgba(77, 160, 255,0.5);
     }
+
+    .preloader {font-size: 1.5em;margin-left: 5px;}
 
     input[type=range]{padding: 0 3px !important;}
 
