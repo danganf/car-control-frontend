@@ -13,13 +13,13 @@ Primary use: Daniel Azevedo
   --color-gradient-btn-2: #0040ff;
   --color-font-1: #C0C0C2;
 }
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+.ui.selection.dropdown .menu::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   opacity: 0.4 !important;
 }
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
   opacity: 0.4 !important;
 }
-::-ms-input-placeholder { /* Microsoft Edge */
+.ui.selection.dropdown .menu::-ms-input-placeholder { /* Microsoft Edge */
   opacity: 0.4 !important;
 }
 /*==============================
@@ -85,21 +85,21 @@ ul {
   padding: 0;
   list-style: none;
 }
-::-moz-selection {
+.ui.selection.dropdown .menu::-moz-selection {
   background: #fff;
   color: #000;
   text-shadow: none;
 }
-::selection {
+.ui.selection.dropdown .menu::selection {
   background: #fff;
   color: #000;
   text-shadow: none;
 }
-::-webkit-input-placeholder {
+.ui.selection.dropdown .menu::-webkit-input-placeholder {
   color: rgba(255,255,255,0.5);
   opacity: 1;
 }
-::-moz-placeholder {
+.ui.selection.dropdown .menu::-moz-placeholder {
   color: rgba(255,255,255,0.5);
   opacity: 1;
 }
@@ -3368,11 +3368,11 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   -moz-transform: scale(1);
   transform: scale(1);
 }
-.sign__group--checkbox label::-moz-selection {
+.sign__group--checkbox label.ui.selection.dropdown .menu::-moz-selection {
   background: transparent;
   color: rgba(255,255,255,0.5);
 }
-.sign__group--checkbox label::selection {
+.sign__group--checkbox label.ui.selection.dropdown .menu::selection {
   background: transparent;
   color: rgba(255,255,255,0.5);
 }
@@ -3605,7 +3605,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.plyr__menu__container .plyr__control[role="menuitemradio"][aria-checked="true"]::before {
+.plyr__menu__container .plyr__control[role="menuitemradio"][aria-checked="true"].ui.selection.dropdown .menu::before {
   background: none;
   background-image: -moz-linear-gradient(90deg, var(--color-line-1) 0%, var(--color-line-2) 100%);
   background-image: -webkit-linear-gradient(90deg, var(--color-line-1) 0%, var(--color-line-2) 100%);
@@ -3821,3 +3821,28 @@ button:disabled:hover, button[disabled]{opacity: .3;}
     border-radius: 6px !important;
     color: var(--color-font-1);
 }
+.ui.fluid.search.selection.dropdown{
+    background-color: #2b2b31;
+    height: 50px;
+}
+.ui.search.dropdown>.text, .ui.search.selection.dropdown>input.search{color: #fff;}
+.ui.fluid.dropdown>.dropdown.icon{
+    color: #737376;
+    opacity: .4;
+}
+.ui.selection.active.dropdown{
+    border-color: #3b3b44 !important;
+    -webkit-box-shadow: 0 0 20px 0 rgba(0,0,0,1.0) !important;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,1.0) !important;
+}
+.ui.selection.dropdown .menu{
+    background-color: #737376;
+}
+.ui.selection.active.dropdown .menu{border-color: #3b3b44 !important;}
+.ui.selection.dropdown .menu>.item{border-top: 1px solid #848494 !important;color: #B7B7BA !important;}
+.ui.dropdown .menu .selected.item, .ui.dropdown.selected {font-weight: bold !important;}
+
+.ui.selection.dropdown .menu::-webkit-scrollbar {width: 10px;}
+.ui.selection.dropdown .menu::-webkit-scrollbar-track {background: #f1f1f1; }
+.ui.selection.dropdown .menu::-webkit-scrollbar-thumb {background: #3b3b44; }
+.ui.selection.dropdown .menu::-webkit-scrollbar-thumb:hover {background: #555; }

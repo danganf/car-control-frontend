@@ -1,6 +1,11 @@
 <template>
     <div>
-        <div class="title">Novo Carro</div>
+        <div class="title">
+            Novo Carro
+            <div class="new-vehicle">
+                <button class="filter__btn" type="button">Criar</button>
+            </div>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -11,18 +16,40 @@
                                 <input type="text" class="sign__input col-12" id="template" name="template" minlength="3" maxlength="30" placeholder="">
                             </div>
                             <div class="group">
-                                <label for="year">Qtd de rodas: <strong>{{year}}</strong></label>
+                                <label for="year">Ano do carro: <strong>{{year}}</strong></label>
                                 <input type="range" min="1900" max="2022" step="1" class="sign__input slider"
                                 v-model.trim='year'
                                 id="year" name="year">
                             </div>
                             <div class="group">
-                                <label for="chassi">Chassi</label>
-                                <input type="text" class="sign__input col-12" id="chassi" name="chassi" minlength="3" maxlength="30" placeholder="">
+                                <label for="manufacture">Tipo do veículo*</label>
+                                <model-select :options="listToSelectTypes" v-model="typeVehicle"
+                                placeholder="selecione">
+                                </model-select>
                             </div>
                             <div class="group">
-                                <label for="Renavam">Renavam</label>
-                                <input type="text" class="sign__input col-12" id="Renavam" name="Renavam" minlength="3" maxlength="30" placeholder="">
+                                <label for="manufacture">Fabricante*</label>
+                                <model-select :options="listToSelectManufactures" v-model="manufacture"
+                                placeholder="selecione">
+                                </model-select>
+                            </div>
+                            <div class="group">
+                                <label for="manufacture">Combustivel*</label>
+                                <model-select :options="listToSelectFuels" v-model="fuel"
+                                placeholder="selecione">
+                                </model-select>
+                            </div>
+                            <div class="group">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="chassi">Chassi</label>
+                                        <input type="text" class="sign__input col-12" id="chassi" name="chassi" minlength="3" maxlength="30" placeholder="">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="Renavam">Renavam</label>
+                                        <input type="text" class="sign__input col-12" id="Renavam" name="Renavam" minlength="3" maxlength="30" placeholder="">
+                                    </div>
+                                </div>
                             </div>
                             <div class="group">
                                 <label for="obs">Obs</label>
@@ -39,14 +66,23 @@
 <script>
 
 import { mapState, mapActions, mapGetters } from 'vuex'
-import store from '@/store';
+import store from '@/store'
+import { ModelSelect } from 'vue-search-select'
+import 'vue-search-select/dist/VueSearchSelect.css'
 
 export default {
     propos: [],
 
+    components: {
+        ModelSelect
+    },
+
     data() {
         return {
-            year: 2019
+            year: new Date().getFullYear()-2,
+            typeVehicle: null,
+            manufacture: null,
+            fuel: null,
         }
     },
 
@@ -57,16 +93,19 @@ export default {
     },
 
     computed: {
-        ...mapState( 'TypeVehicle', { listTypes : 'list' } ),
-        ...mapState( 'Fuel', { listFuels : 'list' } ),
-        ...mapState( 'Manufacture', { listManufacture : 'list' } )
+        ...mapGetters( 'TypeVehicle', { listToSelectTypes : 'listToSelect' } ),
+        ...mapGetters( 'Fuel', { listToSelectFuels : 'listToSelect' } ),
+        ...mapGetters( 'Manufacture', { listToSelectManufactures : 'listToSelect' } )
     },
 
     mounted () {
-        this.$store = store;
         this.getAllTypesVehicles()
         this.getAllFuel()
         this.getAllManufacture()
+    },
+
+    created() {
+        this.$store = store
     }
 
 }
@@ -74,8 +113,8 @@ export default {
 
 <style scoped>
     .title{
-        background-color: var(--color-line-2);
-        padding: 15px 10px;
+        background-color: #004d99;
+        padding: 20px 10px;
         text-transform: uppercase;
         -webkit-box-shadow: 0 0 15px 0 rgba(0,0,0,1.0) !important;
         box-shadow: 0 0 15px 0 rgba(0,0,0,1.0) !important;
@@ -102,6 +141,13 @@ export default {
         display: block;
         width: 86%;
         min-height: 100vh;
+    }
+
+    .new-vehicle{float: right;margin-top: -8px;margin-right: 10px;}
+    .new-vehicle button{width: 90px;height: 40px;}
+    .new-vehicle button:hover{
+        -webkit-box-shadow: 0 0 20px 0 rgba(255,88,96,0.5);
+        box-shadow: 0 0 20px 0 rgba(77, 160, 255,0.5);
     }
 
     input[type=range]{padding: 0 3px !important;}

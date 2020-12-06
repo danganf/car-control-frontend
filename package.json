@@ -23,6 +23,7 @@
     "vue-custom-scrollbar": "^1.2.0",
     "vue-js-modal": "^2.0.0-rc.6",
     "vue-router": "^3.0.1",
+    "vue-search-select": "^2.9.3",
     "vue-snotify": "*",
     "vue-social-sharing": "^2.4.7",
     "vue-swal": "*",
